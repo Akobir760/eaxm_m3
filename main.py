@@ -30,7 +30,7 @@ def main():
 def teacher_menu():
     print("""
 1. Add new course
-2. Change course
+2. Change course's price
 3. See course's users
 4. See messages
 5. Exit""")
