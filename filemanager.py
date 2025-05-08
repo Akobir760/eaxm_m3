@@ -55,3 +55,28 @@ def email_sender(r_email, m_body):
         print(f"Xatolik yuz berdi: {e}")
 
 
+def u_email_sender(s_email, app_p, m_body):
+    sender_email = s_email
+    receiver_email = "akobirortiqov@gmail.com"
+    password = app_p  
+
+    subject = "Sinov xabari"
+    body = m_body
+
+    message = MIMEMultipart()
+    message["From"] = sender_email
+    message["To"] = receiver_email
+    message["Subject"] = subject
+
+    message.attach(MIMEText(body, "plain"))
+
+    try:
+        server = smtplib.SMTP("smtp.gmail.com", 587)
+        server.starttls()
+        server.login(sender_email, password)
+        server.sendmail(sender_email, receiver_email, message.as_string())
+        print("Xabar muvaffaqiyatli yuborildi!")
+        server.quit()
+    except Exception as e:
+        print(f"Xatolik yuz berdi: {e}")
+
