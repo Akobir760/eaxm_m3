@@ -1,4 +1,6 @@
+from teacher import add_course, change_price, course_users, see_all_users, see_all_messages, see_new_messages
 from auth import user_reg, teach_reg, sign_in
+from filemanager import  reader
 
 
 def main():
@@ -27,23 +29,33 @@ def main():
         return main()
     
 
+m_file = reader(file_path="data/messages.csv")
+
+
 def teacher_menu():
-    print("""
+    
+    print(f"""
 1. Add new course
 2. Change course's price
 3. See course's users
-4. See messages
-5. Exit""")
+4. See all users
+5. See all messages ({len(m_file)})
+6. See new messages 
+7. Exit""")
     choice = int(input("Enter your choice number: "))
     if choice == 1:
-        pass
+        add_course()
     elif choice == 2:
-        pass
+        change_price()
     elif choice == 3:
-        pass
+        course_users()
     elif choice == 4:
-        pass
+        see_all_users()
     elif choice == 5:
+        see_all_messages()
+    elif choice == 6:
+        see_new_messages()
+    elif choice == 7:
         print("Exiting...")
         return main() 
     else:
