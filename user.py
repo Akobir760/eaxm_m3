@@ -1,18 +1,19 @@
-from filemanager import reader, writer, u_email_sender, generate_id
+from filemanager import reader, writer,  generate_id
 from datetime import datetime
 
 def sent_message():
-    u_id = int(input("Enter your id: "))
-    u_mess = input("Enter your message: ")
-    file_data = reader("data/users.csv")
+    pass
+#     u_id = int(input("Enter your id: "))
+#     u_mess = input("Enter your message: ")
+#     file_data = reader("data/users.csv")
 
-    m_id = generate_id(file_path="data/messages.csv")
-    sented_at = datetime.now()
-    for data in file_data:
-        if int(data[0]) == u_id:
-            u_email_sender(s_email=data[1], app_p=data[2], m_body=u_mess)
-            m_data = [m_id,data[1],data[0],u_mess,0,sented_at]
-            writer(file_path="data/messages.csv", data=m_data, mode="a")
+#     m_id = generate_id(file_path="data/messages.csv")
+#     sented_at = datetime.now()
+#     for data in file_data:
+#         if int(data[0]) == u_id:
+#             u_email_sender(s_email=data[1], app_p=data[2], m_body=u_mess)
+#             m_data = [m_id,data[1],data[0],u_mess,0,sented_at]
+#             writer(file_path="data/messages.csv", data=m_data, mode="a")
 
 
 def see_my_course():

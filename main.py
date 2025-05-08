@@ -20,6 +20,7 @@ def main():
         res = sign_in()
         if res == "teacher":
             return teacher_menu()
+        
         elif res == "user":
             return user_menu()
         else:

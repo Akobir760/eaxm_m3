@@ -30,53 +30,30 @@ def generate_id(file_path):
     
 
 def email_sender(r_email, m_body):
-    sender_email = "akobirortiqov@gmail.com"
+    sender_email = "sanjarbekwork@gmail.com"
     receiver_email = r_email
-    password = "snnd frli cobd bhpe"  
+    password = "pqmk cvds dzdn gmll"
 
-    subject = "Sinov xabari"
+    subject = "Test Email"
     body = m_body
 
-    message = MIMEMultipart()
-    message["From"] = sender_email
-    message["To"] = receiver_email
-    message["Subject"] = subject
-
-    message.attach(MIMEText(body, "plain"))
-
-    try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.starttls()
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message.as_string())
-        print("Xabar muvaffaqiyatli yuborildi!")
-        server.quit()
-    except Exception as e:
-        print(f"Xatolik yuz berdi: {e}")
-
-
-def u_email_sender(s_email, app_p, m_body):
-    sender_email = s_email
-    receiver_email = "akobirortiqov@gmail.com"
-    password = app_p  
-
-    subject = "Sinov xabari"
-    body = m_body
-
-    message = MIMEMultipart()
-    message["From"] = sender_email
-    message["To"] = receiver_email
-    message["Subject"] = subject
-
-    message.attach(MIMEText(body, "plain"))
+    msg = MIMEMultipart()
+    msg['From'] = sender_email
+    msg['To'] = receiver_email
+    msg['Subject'] = subject
+    msg.attach(MIMEText(body, 'plain'))
 
     try:
-        server = smtplib.SMTP("smtp.gmail.com", 587)
-        server.starttls()
-        server.login(sender_email, password)
-        server.sendmail(sender_email, receiver_email, message.as_string())
-        print("Xabar muvaffaqiyatli yuborildi!")
-        server.quit()
+        with smtplib.SMTP('smtp.gmail.com', 587) as server:
+            server.starttls()
+            server.login(sender_email, password)
+            text = msg.as_string()
+            server.sendmail(sender_email, receiver_email, text)
+            print("Email sent successfully!")
+
     except Exception as e:
-        print(f"Xatolik yuz berdi: {e}")
+        print(f"Failed to send email. Error: {e}")
+
+
+
 
