@@ -1,6 +1,7 @@
 from teacher import add_course, change_price, course_users, see_all_users, see_all_messages, see_new_messages
 from auth import user_reg, teach_reg, sign_in
 from filemanager import  reader
+from user import see_my_course, sent_message, buy_course, my_payments
 
 
 def main():
@@ -64,7 +65,27 @@ def teacher_menu():
 
 
 def user_menu():
-    pass
+    print("""
+1. Buy course
+2. See my courses
+3. Sent message
+4. My payments
+5. Exit""")
+    u_choice = int(input("Enter your  choice number: "))
+    if u_choice == 1:
+        buy_course()
+    elif u_choice == 2:
+        see_my_course()
+    elif u_choice == 3:
+        sent_message()
+    elif u_choice == 4:
+        my_payments()
+    elif u_choice == 5:
+        print("Exiting...")
+        return main()
+    else:
+        print("Invalid choice!")
+    return user_menu()    
 
 
 if __name__ == "__main__":

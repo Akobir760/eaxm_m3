@@ -17,7 +17,7 @@ def user_reg():
         id = generate_id(file_path="data/users.csv")
         password= input("Enter your app password: ")
         full_name = input("Enter your fullname: ")
-        course_id = int(input("Enter course id: "))
+        course_id = 0
         created_at = datetime.now()
         message_body = "Saytimizda muvoffaqiyatli ro'yxatdan o'tdingiz!"
         data = [id,email,password,full_name,course_id,created_at]
