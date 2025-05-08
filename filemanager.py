@@ -13,7 +13,7 @@ def reader(file_path):
         
 
 def writer(file_path, data, mode ="w"):
-    with open(file=file_path, mode="w", newline="") as file:
+    with open(file=file_path, mode=mode, newline="") as file:
         writer = csv.writer(file)
         if mode == "w":
             writer.writerows(data)
