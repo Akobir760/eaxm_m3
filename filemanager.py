@@ -53,3 +53,5 @@ def email_sender(r_email, m_body):
         server.quit()
     except Exception as e:
         print(f"Xatolik yuz berdi: {e}")
+
+
