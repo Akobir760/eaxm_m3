@@ -1,4 +1,4 @@
-from filemanager import reader, writer, generate_id
+from filemanager import reader, writer, generate_id, is_active
 from datetime import datetime
 
 
@@ -7,7 +7,8 @@ def add_course():
     name = input("Enter course name: ")
     price = int(input("Enter course price: "))
     created_at = datetime.now()
-    course_data = [course_id,name,price,created_at]
+    t_id = is_active(file_path1="data/teachers.csv")
+    course_data = [course_id,name,price,t_id,created_at]
     writer(file_path="data/courses.csv", data=course_data, mode="a")
     print("Course is added!")
 
@@ -36,16 +37,21 @@ def course_users():
 
 def see_all_messages():
     m_file = reader(file_path="data/messages.csv")
+    active_user = is_active(file_path1="data/teachers.csv")
+
     for row in m_file:
-        print(f" From {row[1]}: {row[3]}")
-        row[-2] = 1
+        if row[2] == active_user:
+            print(f" From {row[1]}: {row[3]}")
+            row[-2] = 1
     writer(file_path="data/messages.csv", data=m_file)
 
 
 def see_new_messages():
     f_data = reader(file_path="data/messages.csv")
+    active_user = is_active(file_path1="data/teachers.csv")
+
     for row in f_data:
-        if int(row[-2]) == 0:
+        if row[2] == active_user and  int(row[-2]) == 0:
             print(f" From {row[1]}: {row[3]}")
             row[-2] == 1
     writer(file_path="data/messages.csv", data=f_data)
