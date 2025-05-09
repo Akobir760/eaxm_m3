@@ -58,10 +58,4 @@ def see_new_messages():
 
 
 
-def see_all_users():
-    u_file = reader(file_path="data/users.csv")
-    for row in u_file:
-        print(f"User id: {row[0]}, Gmail: {row[1]}, Full name: {row[3]}, Course id: {row[4]}, Registered at: {row[5]}")
-
-
 
