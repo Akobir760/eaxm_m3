@@ -1,5 +1,7 @@
 from filemanager import reader, writer, generate_id, email_sender
 from datetime import datetime
+from random import randint
+import threading
 
 
 
@@ -16,18 +18,19 @@ def user_reg():
     else:
 
         id = generate_id(file_path="data/users.csv")
-        message_body = "Tasdiqlash kodi: 1234"
-        email_sender(r_email=email, m_body=message_body)
+        random_code = randint(1000, 9999)
+        message_body = f"Tasdiqlash kodi: {random_code}"
+        threading.Thread(target=email_sender, args=(email, message_body)).start()
 
         verification_code = int(input("Enter verification code (we send is to your email): "))
         
-        while verification_code != 1234:
+        while verification_code != random_code:
             verification_code = int(input("Enter verification code (we send is to your email): "))
 
         full_name = input("Enter your fullname: ")
-
+        active = 0
         created_at = datetime.now()
-        data = [id,email,full_name,created_at]
+        data = [id,email,full_name,created_at,active]
         writer(file_path="data/users.csv", data=data, mode="a")
         print("Saytimizda muvoffaqiyatli ro'yxatdan o'tdingiz!")
         
@@ -44,18 +47,19 @@ def teach_reg():
                 print("This email already exists!")
                 break 
     else:
-            
-        message_body = "Saytda ro'yxatdan o'tish uchun tasdiqlash kodi: 2345"
+        random_code = randint(1000, 9999)
+        message_body = f"Saytda ro'yxatdan o'tish uchun tasdiqlash kodi: {random_code}"
         
-        email_sender(r_email=email, m_body=message_body)
+        threading.Thread(target=email_sender, args=(email, message_body)).start()
         verification_code = int(input("Enter verification code (we send it to your email):"))
-        while verification_code != 2345:
-            verification_code = int(input("Enter verification code (we send is to your email): "))
+        while verification_code != random_code:
+            verification_code = input("Enter verification code (we send is to your email): ")
 
         id = generate_id("data/teachers.csv")
         fullname = input("Enter your fullname: ")
         created_at = datetime.now()
-        t_data = [id,email,fullname,created_at]
+        active = 0
+        t_data = [id,email,fullname,created_at,active]
 
         writer(file_path="data/teachers.csv", data=t_data, mode="a")
         print("Saytimizda o'qituvchi sifatida muvoffaqiyatli ro'yxatdan o'tdingiz!")
@@ -69,9 +73,17 @@ def sign_in():
     email = input("Enter your email: ")
     for data in u_data:
         if data[1] == email:
+            data[-1] = 1
+            writer(file_path="data/users.csv", data=u_data)
             return "user"
     for t1_data in t_data:
         if t1_data[1] == email:
+            t1_data[-1] = 1
+            writer(file_path="data/teachers.csv", data=t_data)
             return "teacher"
+        
+
+
+
 
     

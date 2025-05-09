@@ -49,11 +49,23 @@ def email_sender(r_email, m_body):
             server.login(sender_email, password)
             text = msg.as_string()
             server.sendmail(sender_email, receiver_email, text)
-            print("Email sent successfully!")
 
     except Exception as e:
         print(f"Failed to send email. Error: {e}")
 
 
+def is_active(file_path1):
+    file_data = reader(file_path=file_path1)
+    for user in file_data:
+        if int(user[-1]) == 1:
+            return user[0]
+        
 
+def log_out(file):
+    file_data = reader(file_path=file)
+    for user in file_data:
+        if int(user[-1]) == 1:
+            user[-1] = 0
+
+    writer(file_path=file, data=file_data)
 

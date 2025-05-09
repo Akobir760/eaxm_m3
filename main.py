@@ -1,6 +1,6 @@
 from teacher import add_course, change_price, course_users, see_all_users, see_all_messages, see_new_messages
 from auth import user_reg, teach_reg, sign_in
-from filemanager import  reader
+from filemanager import  reader, log_out
 from user import see_my_course, sent_message, buy_course, my_payments
 
 
@@ -40,10 +40,9 @@ def teacher_menu():
 1. Add new course
 2. Change course's price
 3. See course's users
-4. See all users
-5. See all messages ({len(m_file)})
-6. See new messages 
-7. Exit""")
+4. See all messages ({len(m_file)})
+5. See new messages 
+6. Exit""")
     choice = int(input("Enter your choice number: "))
     if choice == 1:
         add_course()
@@ -52,13 +51,12 @@ def teacher_menu():
     elif choice == 3:
         course_users()
     elif choice == 4:
-        see_all_users()
-    elif choice == 5:
         see_all_messages()
-    elif choice == 6:
+    elif choice == 5:
         see_new_messages()
-    elif choice == 7:
+    elif choice == 6:
         print("Exiting...")
+        log_out(file="data/teachers.csv")
         return main() 
     else:
         print("Invalid choice!")
@@ -83,6 +81,7 @@ def user_menu():
         my_payments()
     elif u_choice == 5:
         print("Exiting...")
+        log_out(file="data/users.csv")
         return main()
     else:
         print("Invalid choice!")
@@ -90,4 +89,6 @@ def user_menu():
 
 
 if __name__ == "__main__":
+    log_out(file="data/users.csv")
+    log_out(file="data/teachers.csv")
     main()
