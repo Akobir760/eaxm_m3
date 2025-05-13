@@ -1,4 +1,4 @@
-from teacher import add_course, change_price, course_users, see_all_users, see_all_messages, see_new_messages
+from teacher import add_course, change_price, course_users,  see_all_messages, see_new_messages
 from auth import user_reg, teach_reg, sign_in
 from filemanager import  reader, log_out
 from user import see_my_course, sent_message, buy_course, my_payments

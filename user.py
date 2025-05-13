@@ -4,7 +4,6 @@ import threading
 def sent_message():
     
     u_id = is_active(file_path1="data/users.csv")
-    u_mess = input("Enter your message: ")
 
     file_data = reader("data/users.csv")
     teacher_file = reader(file_path="data/teachers.csv")
@@ -12,7 +11,25 @@ def sent_message():
     """teacher idni user qaysi kursni sotib olganiga qarab aniqlamoqchi edim,
     ammo user 2 ta kurs sotib olgan bo'lsa va ularga 2 ta teacher dars o'tadigan bo'lsa
     xabar boshqa teacherga yoki ikkalasiga ham borishi mumkin shuning uchun userdan so'radim!"""
+
+    courses_list = []
+    t_file = reader(file_path="data/teachers.csv")
+    c_file = reader(file_path="data/courses.csv")
+    p_file = reader(file_path="data/payments.csv")
+    u_id = is_active(file_path1="data/users.csv")
+    for user in p_file:
+        if user[1] == u_id:
+            for course in c_file:
+                if course[1] not in [c[1] for c in courses_list] and int(user[2]) == int(course[0]):
+                    courses_list.append(course)
+
+    for course in courses_list:
+        for teacher in t_file:
+            if course[3] == teacher[0]:
+                print(f"Teacher id: {teacher[0]}, Teacher name: {teacher[2]}, Course name: {course[1]}")
+
     teacher_id = input("Enter receiver teacher id: ")
+    u_mess = input("Enter your message: ")
 
     for teacher in teacher_file:
         if teacher[0] == teacher_id:
